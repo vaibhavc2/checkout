@@ -4,20 +4,20 @@ import { fetchUrl } from "../fetch/api";
 export const useFetch = (url) => {
   const [data, setData] = useState();
   const [error, setError] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setloading] = useState(true);
 
   useEffect(() => {
     (async () => {
       try {
         const data = await fetchUrl(url);
         setData(data);
-        setIsLoading(false);
+        setloading(false);
       } catch (error) {
         setError(error);
-        setIsLoading(false);
+        setloading(false);
       }
     })();
   }, [url]);
 
-  return { data, error, isLoading };
+  return { data, error, loading };
 };

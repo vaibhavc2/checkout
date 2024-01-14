@@ -3,8 +3,8 @@
 
 import Image from "next/image";
 import { useEffect } from "react";
-import { apiUrl } from "../constants";
-import { useFetch } from "../hooks/useFetch";
+import { useFetch } from "use-fetch-react-vc";
+import { apiUrl, fetchOptions } from "../constants";
 
 // const ParentComponent = () => {
 //   const [items, setItems] = useState([]);
@@ -73,22 +73,22 @@ import { useFetch } from "../hooks/useFetch";
 // export default ParentComponent;
 
 const ItemsCard = ({ setSubtotal }) => {
-  const { data, error, isLoading } = useFetch(apiUrl);
+  const { data, error, loading } = useFetch(apiUrl, fetchOptions);
   const myIndex = 1;
 
   useEffect(() => {
-    if (!error && !isLoading && data) {
+    if (!error && !loading && data) {
       let total = 0;
       data.products.forEach((item) => {
         if (item.id <= myIndex + 1) total += item.price;
       });
       setSubtotal(total);
     }
-  }, [error, isLoading, data, setSubtotal]);
+  }, [error, loading, data, setSubtotal]);
 
   return (
     <div>
-      {!isLoading && !error && data && (
+      {!loading && !error && data && (
         <div className="grid grid-rows-1">
           {data?.products.map((item, index) => {
             if (index > myIndex) return;

@@ -2,8 +2,8 @@ import { useState } from "react";
 import { BsCart3 } from "react-icons/bs";
 import { FaAngleUp } from "react-icons/fa6";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { phoneUrl } from "../constants";
-import { useFetch } from "../hooks/useFetch";
+import { useFetch } from "use-fetch-react-vc";
+import { fetchOptions, phoneUrl } from "../constants";
 import CheckOut from "./CheckOut";
 import ItemsCard from "./ItemsCard";
 
@@ -17,7 +17,7 @@ const OrderSummary = ({ onClose }) => {
     onClose(); // Call the onClose callback to notify the parent component
   };
 
-  const { data, error, isLoading } = useFetch(phoneUrl);
+  const { data, error, loading } = useFetch(phoneUrl, fetchOptions);
   console.log(data);
 
   return (
